@@ -1,0 +1,4 @@
+#Mon Jul 29 02:27:54 IST 2024
+base.0=/home/saumya_sinha/Task-Manifesto/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
