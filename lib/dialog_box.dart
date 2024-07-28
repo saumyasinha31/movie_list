@@ -1,13 +1,12 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'mybutton.dart';
 
-class DialogBox extends StatefulWidget {
+class DialogBox extends StatelessWidget {
   final TextEditingController movieNameController;
   final TextEditingController directorController;
   final VoidCallback onSave;
   final VoidCallback onCancel;
+  final VoidCallback onPickImage;
 
   const DialogBox({
     super.key,
@@ -15,22 +14,8 @@ class DialogBox extends StatefulWidget {
     required this.directorController,
     required this.onCancel,
     required this.onSave,
+    required this.onPickImage,
   });
-
-  @override
-  _DialogBoxState createState() => _DialogBoxState();
-}
-
-class _DialogBoxState extends State<DialogBox> {
-  XFile? _image;
-  final ImagePicker _picker = ImagePicker();
-
-  Future<void> _pickImage() async {
-    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
-    setState(() {
-      _image = pickedFile;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +26,7 @@ class _DialogBoxState extends State<DialogBox> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             TextField(
-              controller: widget.movieNameController,
+              controller: movieNameController,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20.0),
@@ -52,7 +37,7 @@ class _DialogBoxState extends State<DialogBox> {
               ),
             ),
             TextField(
-              controller: widget.directorController,
+              controller: directorController,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20.0),
@@ -62,22 +47,14 @@ class _DialogBoxState extends State<DialogBox> {
                 hintText: "Director",
               ),
             ),
-            _image == null
-                ? const Text('No image selected.')
-                : Image.file(File(_image!.path)),
-            ElevatedButton(
-              onPressed: _pickImage,
-              child: const Text('Pick Image'),
-            ),
-            Row(
+            Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                MyButton(text: "Save", onPressed: () {
-                  widget.onSave();
-                  Navigator.pop(context, _image);
-                }),
+                MyButton(text: "Pick Image", onPressed: onPickImage),
                 const SizedBox(width: 10),
-                MyButton(text: "Cancel", onPressed: widget.onCancel),
+                MyButton(text: "Save", onPressed: onSave),
+                const SizedBox(width: 10),
+                MyButton(text: "Cancel", onPressed: onCancel),
               ],
             ),
           ],

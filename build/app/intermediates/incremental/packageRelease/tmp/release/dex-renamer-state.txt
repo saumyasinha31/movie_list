@@ -1,4 +1,4 @@
-#Mon Jul 29 02:24:10 IST 2024
+#Mon Jul 29 03:03:36 IST 2024
 base.0=/home/saumya_sinha/Task-Manifesto/build/app/intermediates/dex/release/minifyReleaseWithR8/classes.dex
 path.0=classes.dex
 renamed.0=classes.dex

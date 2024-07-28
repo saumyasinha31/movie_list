@@ -1,4 +1,3 @@
-
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -20,6 +19,8 @@ class _HomePageState extends State<HomePage> {
   final _movieNameController = TextEditingController();
   final _directorController = TextEditingController();
   String? _imagePath;
+
+  final ImagePicker _picker = ImagePicker();
 
   @override
   void initState() {
@@ -57,15 +58,19 @@ class _HomePageState extends State<HomePage> {
             _imagePath = null;
             Navigator.of(context).pop();
           },
+          onPickImage: pickImage,
         );
       },
-    ).then((pickedImage) {
-      if (pickedImage != null) {
-        setState(() {
-          _imagePath = pickedImage.path;
-        });
-      }
-    });
+    );
+  }
+
+  Future<void> pickImage() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      setState(() {
+        _imagePath = pickedFile.path;
+      });
+    }
   }
 
   void deleteMovie(int index) {

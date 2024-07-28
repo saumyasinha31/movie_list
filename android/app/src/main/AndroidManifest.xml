@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.todo">
+    package="com.example.movielist">
 
     <!-- Add these permissions -->
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
-        android:label="todo"
+        android:label="movie list"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
